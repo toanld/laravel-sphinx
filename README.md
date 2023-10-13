@@ -23,7 +23,7 @@ by adding it as a dependency to your project's composer.json file.
 ```json
 {
     "require": {
-        "fobia/laravel-sphinx": "*"
+        "toanld/laravel-sphinx": "*"
     }
 }
 ```
