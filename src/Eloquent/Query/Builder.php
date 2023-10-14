@@ -121,16 +121,15 @@ class Builder extends QueryBuilder
                 }
             }
         }
-
         $sql = $this->grammar->compileInsert($this, $values);
         $sql = preg_replace('/^insert into /iu', 'replace into ', $sql);
-
         // Once we have compiled the insert statement's SQL we can execute it on the
         // connection and return a result as a boolean success indicator as that
         // is the same type of result returned by the raw connection instance.
         $bindings = $this->cleanBindings($bindings);
         //dd($sql);
-        return $this->connection->affectingStatement($sql, $bindings); //  insert($sql, $bindings);
+        //dd($sql);
+        return $this->connection->affectingStatement($sql, []); //  insert($sql, $bindings);
     }
 
     /**
@@ -138,12 +137,9 @@ class Builder extends QueryBuilder
      */
     public function update(array $values)
     {
-        $bindings = array_values(array_merge($values, $this->getBindings()));
+        //$bindings = array_values(array_merge($values, $this->getBindings()));
         $sql = $this->grammar->compileUpdate($this, $values);
-
-        return $this->connection->update($sql, $this->cleanBindings(
-            $this->grammar->prepareBindingsForUpdate($bindings, $values)
-        ));
+        return $this->connection->update($sql, []);
     }
 
     /**
